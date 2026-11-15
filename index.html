@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Kaiku: a friend on your desk, a voice in your ear, a clearer record for your care team.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Kaiku tour</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Nunito+Sans:wght@400;700;800&display=swap">
+<style>
+/* Layout: one long scroll through a day with Kaiku. The robot is the hero, in 3D,
+   and every section borrows its parts: white panels on a red lip, the glowing ring, the red rails. */
+:root {
+  --bg: #FBF6EC; --bg-2: #F3EAD9; --panel: #FFFDF8; --ink: #2A211C; --ink-2: #5E5148;
+  --red: #CF351D; --red-deep: #A52611; --on-red: #FFFDF8;
+  --apricot: #F4923A; --gold: #E9B44C; --glow: #FFE7B0; --lens: #2E2C27; --on-lens: #FFE7B0;
+  --line: #E4D6BF; --ok: #BFE8C4; --shadow: rgba(60, 30, 10, .10);
+  --display: 'Fredoka', 'Trebuchet MS', 'Arial Rounded MT Bold', sans-serif;
+  --text: 'Nunito Sans', 'Avenir Next', Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #23211D; --bg-2: #2E2C27; --panel: #35322C; --ink: #FBF6EC; --ink-2: #D9CDBA;
+  --red: #E0492F; --red-deep: #8E220F; --on-red: #FFFDF8;
+  --apricot: #F4923A; --gold: #E9B44C; --glow: #FFE7B0; --lens: #14130F; --on-lens: #FFE7B0;
+  --line: #4A453C; --ok: #2F5A38; --shadow: rgba(0, 0, 0, .35); color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #23211D; --bg-2: #2E2C27; --panel: #35322C; --ink: #FBF6EC; --ink-2: #D9CDBA;
+  --red: #E0492F; --red-deep: #8E220F; --on-red: #FFFDF8;
+  --apricot: #F4923A; --gold: #E9B44C; --glow: #FFE7B0; --lens: #14130F; --on-lens: #FFE7B0;
+  --line: #4A453C; --ok: #2F5A38; --shadow: rgba(0, 0, 0, .35); color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 400 18px/1.55 var(--text); overflow-x: hidden }
+h1, h2, h3, p { margin: 0 }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)) }
+.band { padding-block: 72px }
+.band-2 { background: var(--bg-2) }
+.band-red { background: var(--red); color: var(--on-red) }
+.band-lens { background: var(--lens); color: #FBF6EC }
+
+.eyebrow { font: 800 14px/1.2 var(--text); letter-spacing: .16em; text-transform: uppercase; color: var(--red); margin-bottom: 12px }
+.band-red .eyebrow { color: var(--glow) } .band-lens .eyebrow { color: var(--apricot) }
+h1 { font: 700 clamp(84px, 16vw, 190px)/.9 var(--display); letter-spacing: -.03em; color: var(--on-red) }
+h2 { font: 600 clamp(34px, 5vw, 56px)/1.08 var(--display); letter-spacing: -.01em; text-wrap: balance; margin-bottom: 18px }
+h3 { font: 600 26px/1.15 var(--display) }
+.lead { font-size: clamp(19px, 2.2vw, 24px); line-height: 1.4; max-width: 34em }
+.muted { color: var(--ink-2) } .band-lens .muted { color: #D9CDBA } .band-red .muted { color: var(--on-red) }
+.fine { font-size: 14px; color: var(--ink-2); line-height: 1.45 } .band-lens .fine { color: #D9CDBA } .band-red .fine { color: var(--on-red) }
+a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 3px }
+:focus-visible { outline: 3px solid var(--apricot); outline-offset: 3px; border-radius: 8px }
+
+/* the robot's parts */
+.panel { background: var(--panel); color: var(--ink); border-radius: 28px; padding: 26px 28px; box-shadow: 0 9px 0 var(--red) }
+.band-red .panel { box-shadow: 0 9px 0 var(--red-deep) }
+.band-lens .panel { background: #3B3832; color: #FBF6EC; box-shadow: 0 9px 0 var(--apricot) }
+.band-lens .panel .muted { color: #E9DECB }
+.rails { display: flex; flex-direction: column; gap: 10px; margin: 26px 0 }
+.rails i { display: block; height: 14px; border-radius: 7px; background: var(--on-red) }
+.rails i:first-child { width: 240px } .rails i:last-child { width: 170px }
+.ring { display: inline-block; border-radius: 50%; background: #2E2C27; border: 6px solid #FFF6DF; box-shadow: 0 0 0 3px var(--apricot), 0 0 22px 4px #FFD27A }
+.slot { display: inline-block; font: 600 14px/1 var(--display); color: var(--on-lens); background: #2E2C27; border-radius: 9px; padding: 7px 14px; letter-spacing: .04em }
+.pill { display: inline-block; font: 600 15px/1 var(--display); background: var(--glow); color: #2A211C; border-radius: 30px; padding: 8px 16px }
+.kicker { font: 800 13px/1.2 var(--text); letter-spacing: .12em; text-transform: uppercase; color: var(--red); margin-bottom: 6px }
+.band-lens .kicker { color: var(--apricot) }
+
+button, .btn { font: 600 16px/1 var(--display); border: 0; cursor: pointer; border-radius: 30px; padding: 12px 20px; background: var(--lens); color: var(--on-lens); transition: transform .15s }
+button:hover { transform: translateY(-2px) } button:active { transform: translateY(1px) }
+button[aria-pressed="true"], .seg button[aria-pressed="true"] { background: var(--red); color: var(--on-red) }
+.chip { background: var(--panel); color: var(--ink); box-shadow: 0 4px 0 var(--line) }
+.band-red .chip { background: var(--on-red); color: #2A211C; box-shadow: 0 4px 0 var(--red-deep) }
+.band-red .chip[aria-pressed="true"] { background: #2E2C27; color: var(--glow) }
+
+/* hero */
+.hero { padding-block: 40px 56px }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: center }
+.stage { position: relative; aspect-ratio: 4 / 5; max-width: 100%; max-height: 640px; margin: 0 auto; width: 100%; touch-action: pan-y }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab }
+.stage canvas:active { cursor: grabbing }
+.stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 40px }
+.stage-hint { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%) rotate(-3deg); white-space: nowrap }
+.parts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px }
+.part-say { min-height: 3.2em; margin-top: 16px; font-size: 18px; max-width: 30em }
+
+/* ritual */
+.ritual { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 34px }
+.ritual .panel { display: flex; flex-direction: column; gap: 12px }
+.seg { display: flex; gap: 6px; flex-wrap: wrap }
+.seg button { padding: 9px 14px; font-size: 14px; background: var(--bg-2); color: var(--ink) }
+input[type=range] { width: 100%; accent-color: var(--red) }
+.dials { display: flex; gap: 14px; font: 600 15px/1.2 var(--display) }
+.dials span { flex: 1; background: var(--bg-2); border-radius: 14px; padding: 8px 10px; text-align: center }
+.dials b { display: block; font-size: 24px; color: var(--red) }
+.breath-dot { width: 74px; height: 74px; border-width: 12px; align-self: center; transition: transform 4s ease-in-out, box-shadow 4s ease-in-out }
+.breath-dot.in { transform: scale(1.5); box-shadow: 0 0 0 5px var(--apricot), 0 0 60px 18px #FFD27A }
+.bpm { font: 600 54px/1 var(--display); color: var(--red); font-variant-numeric: tabular-nums }
+.taps { display: flex; gap: 6px; min-height: 14px; flex-wrap: wrap }
+.taps i { width: 12px; height: 12px; border-radius: 50%; background: var(--red); animation: pop .3s ease-out }
+@keyframes pop { from { transform: scale(2.4); opacity: .3 } }
+
+/* feature rows */
+.feature { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: center; margin-top: 56px }
+.feature.flip > :first-child { order: 2 }
+.feature ul { margin: 16px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px }
+.feature li { padding-left: 30px; position: relative }
+.feature li::before { content: ""; position: absolute; left: 0; top: .42em; width: 14px; height: 14px; border-radius: 50%; background: var(--red) }
+.media { display: flex; justify-content: center }
+.phone { width: min(270px, 70vw); aspect-ratio: 340 / 740; border-radius: 38px; border: 7px solid #2A211C; overflow: hidden; background: #2A211C; box-shadow: 0 14px 0 var(--red), 0 30px 50px var(--shadow); transform: rotate(-2.5deg) }
+.flip .phone { transform: rotate(2.5deg) }
+.phone video, .phone img, .screen video, .frame video, .frame img { width: 100%; height: 100%; object-fit: cover; display: block }
+.screen { width: 100%; aspect-ratio: 720 / 492; border-radius: 18px; border: 7px solid #2A211C; overflow: hidden; background: #2A211C; box-shadow: 0 12px 0 var(--red), 0 30px 50px var(--shadow) }
+.frame { width: min(330px, 78vw); aspect-ratio: 9 / 16; border-radius: 44px; padding: 14px; background: var(--panel); box-shadow: 0 14px 0 var(--red-deep), 0 30px 50px var(--shadow); transform: rotate(3deg); overflow: hidden }
+.frame video { border-radius: 32px }
+.tag { position: relative; margin-top: -26px; text-align: center }
+
+/* glasses scene */
+.walk { position: relative; border-radius: 28px; background: linear-gradient(var(--bg-2), var(--panel)); padding: 28px; box-shadow: 0 9px 0 var(--red); overflow: hidden }
+.glasses { display: flex; align-items: center; justify-content: center; gap: 0; margin: 14px 0 6px }
+.lensg { width: 104px; height: 78px; border: 9px solid #2A211C; border-radius: 26px 26px 34px 34px; background: rgba(46, 44, 39, .12); position: relative }
+.bridge { width: 26px; height: 9px; background: #2A211C; border-radius: 5px; margin-top: -22px }
+.wave { position: absolute; right: -34px; top: 18px; width: 22px; height: 40px; border: 5px solid var(--red); border-color: transparent var(--red) transparent transparent; border-radius: 50%; animation: wave 1.6s ease-out infinite }
+.wave.w2 { right: -52px; top: 8px; width: 30px; height: 60px; animation-delay: .35s }
+@keyframes wave { from { opacity: 0; transform: translateX(-8px) } 40% { opacity: 1 } to { opacity: 0; transform: translateX(8px) } }
+.lane { position: relative; height: 54px; margin-top: 18px; border-radius: 27px; background: var(--bg); border: 2px dashed var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font: 600 14px/1 var(--display) }
+.frames { position: absolute; inset: 0; overflow: hidden; border-radius: 27px; pointer-events: none }
+.frames i { position: absolute; top: 15px; left: 90px; width: 30px; height: 22px; border-radius: 6px; background: var(--apricot); opacity: 0 }
+.see-on .frames i { animation: fly 3s linear infinite }
+.see-on .frames i:nth-child(2) { animation-delay: 1s } .see-on .frames i:nth-child(3) { animation-delay: 2s }
+@keyframes fly { 0% { opacity: 0; transform: translateX(0) } 10% { opacity: 1 } 85% { opacity: 1 } 100% { opacity: 0; transform: translateX(calc(min(60vw, 330px))) } }
+.switch { display: flex; align-items: center; gap: 14px; margin-top: 18px }
+.switch button { width: 68px; height: 38px; padding: 0; border-radius: 19px; background: var(--line); position: relative; flex: none }
+.switch button::after { content: ""; position: absolute; left: 4px; top: 4px; width: 30px; height: 30px; border-radius: 50%; background: var(--panel); transition: transform .2s }
+.switch button[aria-checked="true"] { background: var(--red) }
+.switch button[aria-checked="true"]::after { transform: translateX(30px) }
+
+/* sentence journey */
+.journey { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 36px; position: relative }
+.stop { background: #3B3832; border-radius: 22px; padding: 18px 16px; min-width: 0; transition: background .3s, transform .3s; box-shadow: 0 7px 0 #1b1a17 }
+.stop.on { background: var(--red); transform: translateY(-8px); box-shadow: 0 7px 0 var(--red-deep) }
+.stop h3 { font-size: 20px; color: var(--glow) } .stop.on h3 { color: #FFFDF8 }
+.stop p { font-size: 15px; line-height: 1.4; color: #E9DECB; margin-top: 6px } .stop.on p { color: #FFFDF8 }
+.bubble { margin-top: 30px; display: flex; flex-direction: column; gap: 12px; max-width: 620px }
+.bubble p { border-radius: 22px; padding: 14px 20px; font-size: 19px; line-height: 1.4 }
+.bubble .me { background: #FBF6EC; color: #2A211C; align-self: flex-end; border-bottom-right-radius: 6px }
+.bubble .k { background: var(--glow); color: #2A211C; align-self: flex-start; border-bottom-left-radius: 6px; transition: opacity .5s }
+.bubble .k.wait { opacity: .25 }
+.brains { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 44px }
+
+/* consensus toy */
+.toy { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 36px; align-items: center; margin-top: 34px }
+.groups { display: flex; flex-direction: column; gap: 16px }
+.group { background: var(--panel); border-radius: 22px; padding: 14px 18px; box-shadow: 0 6px 0 var(--red); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px }
+.group h3 { font-size: 20px }
+.verdict { text-align: center; background: var(--panel); border-radius: 36px; padding: 34px 24px; box-shadow: 0 12px 0 var(--red) }
+.state { display: inline-block; font: 600 clamp(30px, 4.4vw, 46px)/1 var(--display); border-radius: 50px; padding: 16px 30px; margin: 14px 0; color: #2A211C; transition: background .3s }
+.st-stable { background: #BFE8C4 } .st-watch { background: #FFE7B0 } .st-call { background: #F4923A } .st-none { background: #E4D6BF }
+
+/* dashboard, gates, numbers, status */
+.cards3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 34px }
+.big { font: 600 clamp(64px, 9vw, 108px)/1 var(--display); letter-spacing: -.03em; color: var(--red); font-variant-numeric: tabular-nums }
+.ticks { margin: 12px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.4; color: var(--ink-2) }
+.foot-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: flex-end }
+
+/* scroll reveal: hidden only once JS has marked what is below the fold */
+.pre { opacity: 0; transform: translateY(26px) }
+.rv { transition: opacity .7s ease-out, transform .7s ease-out }
+@media (prefers-reduced-motion: reduce) { .pre { opacity: 1; transform: none } .rv, .stop, .breath-dot { transition: none } .wave, .see-on .frames i, .taps i { animation: none } }
+
+@media (max-width: 860px) {
+  .band { padding-block: 52px }
+  .hero-grid, .feature, .toy { grid-template-columns: minmax(0, 1fr) }
+  .feature.flip > :first-child { order: 0 }
+  .ritual, .cards3, .brains { grid-template-columns: minmax(0, 1fr) }
+  .journey { grid-template-columns: minmax(0, 1fr) }
+  .stop.on { transform: translateX(8px) }
+  .stage { max-height: 440px; aspect-ratio: 1 / 1 }
+}
+</style>
+
+<header class="band-red hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Junction 2026 · Aalto, Beyond the Clinic</p>
+      <h1>kaiku</h1>
+      <div class="rails"><i></i><i></i></div>
+      <p class="lead">A friend on your desk, a voice in your ear, a clearer record for your care team. For staying well at home after TMS depression treatment.</p>
+      <div class="parts" role="group" aria-label="Parts of the robot">
+        <button class="chip" data-part="ear">Ear dial</button>
+        <button class="chip" data-part="eyes">Eyes</button>
+        <button class="chip" data-part="camera">Camera</button>
+        <button class="chip" data-part="speaker">Speaker</button>
+        <button class="chip" data-part="neck">Neck</button>
+        <button class="chip" data-part="base">Base</button>
+      </div>
+      <p class="part-say" id="partSay" aria-live="polite">Drag the robot to turn it. Move around and its head follows you.</p>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="bot" aria-label="A 3D model of the Kaiku robot: a red head with a white face plate and a glowing ring, on a white base"></canvas>
+      <span class="pill stage-hint">drag me around</span>
+    </div>
+  </div>
+</header>
+
+<section class="band" id="ritual">
+  <div class="wrap">
+    <p class="eyebrow">Three minutes, no typing</p>
+    <h2>Try its ritual on the model above</h2>
+    <p class="lead muted">People with depression stop opening apps, so the robot starts. A dial, a breath and a drum. This page plays it on the 3D model; the real one runs it by ear dial on its Atech board.</p>
+    <div class="ritual">
+      <div class="panel rv">
+        <p class="kicker">One · the ear dial</p>
+        <h3>Three turns of an ear</h3>
+        <div class="seg" role="group" aria-label="Which dial">
+          <button data-dial="0" aria-pressed="true">Mood</button><button data-dial="1" aria-pressed="false">Energy</button><button data-dial="2" aria-pressed="false">Sleep</button>
+        </div>
+        <label class="fine" for="dial">Turn it</label>
+        <input type="range" id="dial" min="0" max="10" value="5">
+        <div class="dials"><span>Mood<b id="d0">5</b></span><span>Energy<b id="d1">5</b></span><span>Sleep<b id="d2">5</b></span></div>
+      </div>
+      <div class="panel rv">
+        <p class="kicker">Two · a breath</p>
+        <h3>One slow breath together</h3>
+        <span class="ring breath-dot" id="breathDot"></span>
+        <p class="fine" id="breathSay" aria-live="polite">Press start and breathe with the ring.</p>
+        <button id="breathBtn" aria-pressed="false">Start breathing</button>
+      </div>
+      <div class="panel rv">
+        <p class="kicker">Three · a drum</p>
+        <h3>Tap a rhythm on its head</h3>
+        <p class="bpm"><span id="bpm">0</span> <span style="font-size:20px">taps a minute</span></p>
+        <div class="taps" id="taps" aria-hidden="true"></div>
+        <button id="tapBtn">Tap</button>
+        <p class="fine">Or click the robot’s head. Inspired by research on improvisational music therapy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-2" id="real">
+  <div class="wrap">
+    <div class="feature" style="margin-top:0">
+      <div class="media">
+        <div>
+          <div class="frame rv"><video src="media/robot-orbit.mp4" poster="media/robot-orbit.jpg" autoplay muted loop playsinline aria-label="A walk around the real Kaiku robot on a workbench at Junction"></video></div>
+          <p class="tag"><span class="pill">the real one, Sunday morning</span></p>
+        </div>
+      </div>
+      <div class="rv">
+        <p class="eyebrow">Not a render</p>
+        <h2>Printed and wired in a weekend</h2>
+        <p class="muted">The head runs on one Atech board: a screen for eyes, an encoder as the ear, a neck motor, a speaker. Taps are felt by its orientation sensor. The base holds an Arduino UNO Q whose camera finds a face and sends only numbers.</p>
+        <ul>
+          <li>A press of the ear opens a talk, in the same voice as the phone.</li>
+          <li>The check-in runs only when asked. Talking has priority.</li>
+          <li>Every hardware part has a software twin, so the rest never waited for the print.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="day">
+  <div class="wrap">
+    <p class="eyebrow">The rest of the day</p>
+    <h2>It lives on things you already own</h2>
+    <p class="lead muted">One person, one record, from the first tap to the practitioner’s page.</p>
+
+    <div class="feature">
+      <div class="media"><div class="phone rv"><video src="media/checkin.mp4" poster="media/checkin.jpg" autoplay muted loop playsinline aria-label="The iPhone check-in: a chat where Kaiku answers a hard day gently, then the call continuing on the Lock Screen"></video></div></div>
+      <div class="rv">
+        <p class="kicker">iPhone</p>
+        <h3>A check-in like meeting on the street</h3>
+        <p class="muted" style="margin-top:10px">Short on an ordinary day, as long as you want on a hard one. Voice, typing or three dials all count.</p>
+        <ul>
+          <li>A sad thing gets a gentle, curious reply. Never “ok, anyway”.</li>
+          <li>Talk is a call that keeps going behind the Lock Screen.</li>
+          <li>One-minute games are also readings, compared only with your own usual.</li>
+        </ul>
+        <p class="fine" style="margin-top:14px">Recorded in the iOS simulator with real replies. “Aino” is a simulated person.</p>
+      </div>
+    </div>
+
+    <div class="feature flip">
+      <div class="walk rv" id="walk">
+        <p class="kicker">On a walk</p>
+        <div class="glasses" aria-hidden="true">
+          <div class="lensg"></div><div class="bridge"></div><div class="lensg"><span class="wave"></span><span class="wave w2"></span></div>
+        </div>
+        <div class="lane"><span>glasses</span><span id="laneSay">voice only</span>
+          <div class="frames" aria-hidden="true"><i></i><i></i><i></i></div>
+        </div>
+        <div class="switch">
+          <button id="seeBtn" role="switch" aria-checked="false" aria-label="Let Kaiku see through the glasses during walks"></button>
+          <p class="fine" id="seeSay">“Let Kaiku see” is off, as it starts. Kaiku is a voice in your ear and sees nothing.</p>
+        </div>
+      </div>
+      <div class="rv">
+        <p class="kicker">Meta glasses</p>
+        <h3>Head up, hands free, phone in your pocket</h3>
+        <p class="muted" style="margin-top:10px">Kaiku keeps you company in your ear and you choose how: calm, playful or chatty. If the glasses come off, the walk carries on from the phone.</p>
+        <ul>
+          <li>Seeing is a separate choice. Flip the switch to watch what changes.</li>
+          <li>Nothing from a picture is stored, and no reading comes from one.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="media"><div class="screen rv"><video src="media/mac.mp4" poster="media/mac.jpg" autoplay muted loop playsinline aria-label="The Kaiku Mac app: today’s path, a lantern game and the days view"></video></div></div>
+      <div class="rv">
+        <p class="kicker">Mac</p>
+        <h3>Two taps of Control and Kaiku is there</h3>
+        <p class="muted" style="margin-top:10px">It grows from the edge of the screen in any app, with live captions. The Mac itself adds only the rhythm of the day: app categories, breaks, late nights. Never window titles, URLs or content.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-lens" id="mind">
+  <div class="wrap">
+    <p class="eyebrow">How it thinks</p>
+    <h2>How one sentence travels</h2>
+    <p class="lead muted">Three brains, one job each. Press play and follow it.</p>
+    <div class="bubble">
+      <p class="me">I’m not feeling too well.</p>
+      <p class="k wait" id="reply">…that sounds heavy. Do you want to tell me about it?</p>
+    </div>
+    <div class="journey" id="journey">
+      <div class="stop"><h3>Your voice</h3><p>Goes straight to the voice model, and nowhere else.</p></div>
+      <div class="stop"><h3>Gemini Live</h3><p>Hears a clear feeling and tells Kaiku’s mind once.</p></div>
+      <div class="stop"><h3>Kaiku’s rules</h3><p>Plain code picks how to meet you: comfort, celebrate, explore or give space.</p></div>
+      <div class="stop"><h3>A small plan</h3><p>Brief or stay, and at most one offer. No scores go back.</p></div>
+      <div class="stop"><h3>The reply</h3><p>Spoken in the one voice, on whichever device you’re near.</p></div>
+    </div>
+    <p style="margin-top:26px"><button id="playBtn" style="background:var(--glow);color:#2A211C">Play it again</button></p>
+    <div class="brains">
+      <div class="panel rv"><p class="kicker">Plain code</p><h3>Rules decide</h3><p class="muted" style="margin-top:8px">A fixed rule anyone can read sets the person’s state and owns the crisis path. Same answer tomorrow.</p></div>
+      <div class="panel rv"><p class="kicker">Gemma 4, open model</p><h3>Gemma explains</h3><p class="muted" style="margin-top:8px">It picks the evidence for the practitioner. Code checks every citation and writes every number.</p></div>
+      <div class="panel rv"><p class="kicker">Gemini Live</p><h3>Gemini speaks</h3><p class="muted" style="margin-top:8px">One voice on robot, phone, Mac and glasses. It talks from a short card and never sees a score.</p></div>
+    </div>
+    <p class="fine" style="margin-top:22px">On our bench, with the robot’s software twin and a synthetic voice, Kaiku’s answer began 2.14 s after the last word. The reply above is an illustration of the tone, not a recording.</p>
+  </div>
+</section>
+
+<section class="band" id="consensus">
+  <div class="wrap">
+    <p class="eyebrow">From signals to one word</p>
+    <h2>Four signal groups, one consensus</h2>
+    <p class="lead muted">Each group is compared with the person’s own usual. Change what each one says and watch the word.</p>
+    <div class="toy">
+      <div class="groups" id="groups"></div>
+      <div class="verdict rv">
+        <p class="kicker">Consensus</p>
+        <p><span class="state st-stable" id="state" aria-live="polite">Stable</span></p>
+        <p class="muted" id="why">Enough recent evidence, as usual or better.</p>
+        <p class="fine" style="margin-top:16px">A simplified toy. The real rule, with weights, thresholds and freshness windows, is one file: config/criteria.toml. A safety trigger overrides everything.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-2" id="dashboard">
+  <div class="wrap">
+    <div class="feature flip" style="margin-top:0">
+      <div class="media"><div class="screen rv" style="aspect-ratio:900/562"><video src="media/dashboard.mp4" poster="media/dashboard.jpg" autoplay muted loop playsinline aria-label="The practitioner dashboard on the simulated record Aino: trends, consensus, Gemma’s review, agent trace and knowledge graph"></video></div></div>
+      <div class="rv">
+        <p class="eyebrow">For the practitioner</p>
+        <h2>One page for the care team</h2>
+        <ul>
+          <li>Who is worth a check-in, and the trend behind it.</li>
+          <li>Every sentence in Gemma’s review opens the record it came from.</li>
+          <li>A care action is recorded in Kaiku. It contacts nobody.</li>
+        </ul>
+        <p style="margin-top:20px"><a href="https://harrish21raj--kaiku-web.us-east.modal.run/?id=aino"><b>Open the live dashboard</b></a> <span class="pill" style="margin-left:8px">simulated record</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-lens" id="trust">
+  <div class="wrap">
+    <p class="eyebrow">Trust</p>
+    <h2>Pictures and sound are used, then gone</h2>
+    <div class="cards3">
+      <div class="panel rv"><p class="kicker">Stays on the device</p><h3>Camera frames</h3><p class="muted" style="margin-top:8px">Processed in memory, never stored. The robot’s camera board sends numbers, like where a face is.</p></div>
+      <div class="panel rv"><p class="kicker">Goes to Gemini Live</p><h3>Your voice, while you talk</h3><p class="muted" style="margin-top:8px">And on a walk, only with “Let Kaiku see” on, about one glasses picture a second. Google may keep session state for up to a day.</p></div>
+      <div class="panel rv"><p class="kicker">Reaches the care team</p><h3>Numbers and evidence</h3><p class="muted" style="margin-top:8px">Kaiku’s cloud rejects raw audio and images. Practitioners never see conversations or the notebook.</p></div>
+    </div>
+    <p class="lead" style="margin-top:34px">Every signal has its own switch. A crisis is never left to a model: the message is pre-written, with the MIELI helpline and 112.</p>
+  </div>
+</section>
+
+<section class="band" id="works">
+  <div class="wrap">
+    <p class="eyebrow">Does it work?</p>
+    <h2>On people: unknown. On synthetic people:</h2>
+    <div class="cards3">
+      <div class="rv"><p class="big">0.08</p><h3>false flags per person-week</h3><p class="muted" style="margin-top:8px">About one unneeded “worth a check-in” per person every three months.</p></div>
+      <div class="rv"><p class="big">96 %</p><h3>of moderate changes flagged</h3><p class="muted" style="margin-top:8px">Within 21 days. A sudden drop takes about two days, a slow slide about a week.</p></div>
+      <div class="rv"><p class="big" style="color:var(--ink)">21 %</p><h3>of mild changes reach “needs a call”</h3><p class="muted" style="margin-top:8px">Mild change is mostly missed, and skipped check-ins hide a decline.</p></div>
+    </div>
+    <p class="fine" style="margin-top:22px">Our own generator, assumptions in docs/validation.md. These numbers describe the rule, not people. Nothing here is clinically validated.</p>
+
+    <div class="cards3" style="margin-top:56px">
+      <div class="panel rv"><h3>Real today</h3><ul class="ticks"><li>The robot, built, with the ritual by ear dial</li><li>The dashboard, live on Modal</li><li>Real Gemma and Gemini Live calls</li><li>A signed app on a real iPhone</li><li>Real Meta glasses, registered and connected</li></ul></div>
+      <div class="panel rv" style="box-shadow:0 9px 0 var(--gold)"><h3>Pretend</h3><ul class="ticks"><li>Every person’s record, and it says so on screen</li><li>The synthetic people behind the numbers above</li><li>Thresholds: engineering defaults, not set on patients</li></ul></div>
+      <div class="panel rv" style="box-shadow:0 9px 0 var(--lens)"><h3>Still to test</h3><ul class="ticks"><li>A whole ritual on the physical robot, with its record on the dashboard</li><li>A filmed walk on the real glasses</li><li>People outside the team</li><li>Anything clinical</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<footer class="band band-red">
+  <div class="wrap">
+    <p class="eyebrow">What’s next</p>
+    <h2>A pilot with a TMS clinic</h2>
+    <p class="lead">Eight to twelve weeks after a course: does the consensus agree with the clinician, and do people keep the ritual? Then thresholds set on real days.</p>
+    <div class="foot-grid" style="margin-top:40px">
+      <div><p class="eyebrow">Team</p><h3>Harrish · Edwin · Xavier</h3></div>
+      <p class="fine" style="max-width:30em"><a href="https://github.com/Harrishayy/kaiku">github.com/Harrishayy/kaiku</a> · MIT<br>Research prototype. Not a medical device, not a crisis service. Every record shown is simulated.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------- scroll reveal ---------- */
+  var rvs = [].slice.call(document.querySelectorAll('.rv'));
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    rvs.forEach(function (el) {
+      if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('pre'); }
+      io.observe(el);
+    });
+  }
+
+  /* ---------- the 3D robot ---------- */
+  var bot = { knob: 0, tap: 0, breath: false, target: null };
+  var parts = {
+    ear: { rot: 0.25, say: 'The ear dial. Three turns set mood, energy and last night’s sleep. A press opens a talk.' },
+    eyes: { rot: 0, say: 'A small screen for its eyes. They blink, and they look at you.' },
+    camera: { rot: -0.15, say: 'The camera inside the glowing ring finds your face on the board. Numbers leave it, pictures never do.' },
+    speaker: { rot: -1.1, say: 'The speaker. Kaiku has one voice, the same on the robot, phone, Mac and glasses.' },
+    neck: { rot: 0.7, say: 'A geared neck motor turns the head toward you.' },
+    base: { rot: 0.45, say: 'The base holds an Arduino UNO Q for the camera and chimes. The head runs on one Atech board.' }
+  };
+  var chips = [].slice.call(document.querySelectorAll('[data-part]'));
+  chips.forEach(function (c) {
+    c.setAttribute('aria-pressed', 'false');
+    c.addEventListener('click', function () {
+      chips.forEach(function (o) { o.setAttribute('aria-pressed', o === c ? 'true' : 'false'); });
+      var p = parts[c.dataset.part]; bot.target = p.rot; bot.focus = c.dataset.part; bot.focusT = 0;
+      $('partSay').textContent = p.say;
+    });
+  });
+
+  function fallback() {
+    var st = $('stage'); st.innerHTML = '<img src="media/robot-head.jpg" alt="The Kaiku robot: a red and white head with a glowing ring around its camera">';
+  }
+
+  function build3D() {
+    var T = window.THREE, canvas = $('bot'), stage = $('stage');
+    var renderer = new T.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+    var scene = new T.Scene();
+    var cam = new T.PerspectiveCamera(32, 1, 0.1, 200);
+    cam.position.set(0, 16, 52); cam.lookAt(0, 11.6, 0);
+    scene.add(new T.HemisphereLight(0xfff6e8, 0xcdbfa8, 0.62));
+    var key = new T.DirectionalLight(0xffffff, 0.55); key.position.set(8, 18, 14); scene.add(key);
+    var rim = new T.DirectionalLight(0xb9a0ff, 0.35); rim.position.set(-12, 8, -10); scene.add(rim);
+
+    function mat(c, o) { return new T.MeshStandardMaterial(Object.assign({ color: c, roughness: 0.55, metalness: 0.02 }, o || {})); }
+    var M = { red: mat(0xd93a20), white: mat(0xf1ece2), apricot: mat(0xf4923a), gold: mat(0xe2aa3c, { metalness: 0.25, roughness: 0.4 }),
+      dark: mat(0x2a2925, { roughness: 0.35 }), glow: new T.MeshStandardMaterial({ color: 0xffd58a, emissive: 0xff9d2e, emissiveIntensity: 0.5, roughness: 0.4 }),
+      eye: new T.MeshBasicMaterial({ color: 0xffe7b0 }), led: new T.MeshBasicMaterial({ color: 0x5fe07a }) };
+
+    function rbox(w, h, d, r, m) {
+      var s = new T.Shape(), x = -w / 2, y = -h / 2;
+      s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+      s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+      s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+      var b = Math.min(0.35, d / 4);
+      var g = new T.ExtrudeGeometry(s, { depth: d - 2 * b, bevelEnabled: true, bevelThickness: b, bevelSize: b, bevelSegments: 4, curveSegments: 14 });
+      g.center(); return new T.Mesh(g, m);
+    }
+    function cyl(r, h, m, seg) { return new T.Mesh(new T.CylinderGeometry(r, r, h, seg || 40), m); }
+    function at(o, x, y, z, parent) { o.position.set(x, y, z); (parent || robot).add(o); return o; }
+
+    var robot = new T.Group(); scene.add(robot);
+
+    /* base: white box, two red rails, gold clips, vents, a green LED */
+    at(rbox(10.5, 8, 10.5, 1.4, M.white), 0, 4, 0);
+    at(rbox(7.4, 0.75, 0.6, 0.3, M.red), 0.9, 6.3, 5.3);
+    at(rbox(6.0, 0.75, 0.6, 0.3, M.red), 1.6, 5.1, 5.3);
+    at(rbox(1.3, 1.9, 0.5, 0.2, M.gold), -3.3, 2.6, 5.3);
+    at(rbox(1.3, 1.9, 0.5, 0.2, M.gold), -1.6, 2.2, 5.3);
+    for (var i = 0; i < 5; i++) { at(rbox(0.25, 0.28, 4.2, 0.1, M.dark), -5.27, 2.4 + i * 0.62, 0.6); }
+    at(rbox(0.5, 5.6, 0.5, 0.2, M.red), -5.3, 3.8, 3.6);
+    var led = at(new T.Mesh(new T.SphereGeometry(0.22, 12, 12), M.led), 2.4, 2.6, 5.3);
+
+    /* neck: apricot plate and gear */
+    at(rbox(6.4, 0.35, 5.2, 0.6, M.apricot), 0, 8.15, 0).rotation.x = Math.PI / 2;
+    var gear = at(cyl(2.3, 0.8, M.apricot, 28), 0, 8.7, 0);
+    for (var t = 0; t < 22; t++) { var a = t / 22 * Math.PI * 2; var tooth = rbox(0.42, 0.8, 0.5, 0.1, M.apricot); tooth.position.set(Math.cos(a) * 2.45, 0, Math.sin(a) * 2.45); tooth.rotation.y = -a + Math.PI / 2; gear.add(tooth); }
+    at(cyl(1.3, 1.4, M.apricot), 0, 9.5, 0);
+
+    /* head: red housing, white face plate, display slot, glowing ring, lens, two dots, speaker, ear dial */
+    var head = new T.Group(); head.position.set(0, 10.2, 0); robot.add(head);
+    at(rbox(9.4, 10.4, 6.2, 2.2, M.red), 0, 5.2, 0, head);
+    at(rbox(7.9, 8.6, 0.45, 1.9, M.white), 0, 5.75, 3.05, head);
+    at(rbox(3.3, 1.5, 0.3, 0.3, M.dark), 0, 8.5, 3.2, head);
+    var eyeL = at(rbox(0.5, 0.75, 0.1, 0.2, M.eye), -0.75, 8.5, 3.38, head);
+    var eyeR = at(rbox(0.5, 0.75, 0.1, 0.2, M.eye), 0.75, 8.5, 3.38, head);
+    var ring = at(new T.Mesh(new T.TorusGeometry(2.25, 0.42, 20, 64), M.glow), 0, 4.9, 3.25, head);
+    at(new T.Mesh(new T.TorusGeometry(2.85, 0.3, 16, 64), M.red), 0, 4.9, 3.12, head);
+    var lens = at(cyl(1.85, 0.4, M.dark, 48), 0, 4.9, 3.2, head); lens.rotation.x = Math.PI / 2;
+    at(new T.Mesh(new T.SphereGeometry(0.09, 8, 8), M.eye), 0.75, 4.7, 3.43, head);
+    var d1 = at(cyl(0.45, 0.3, M.dark, 24), -3.0, 2.2, 3.25, head); d1.rotation.x = Math.PI / 2;
+    var d2 = at(cyl(0.45, 0.3, M.dark, 24), 3.0, 2.2, 3.25, head); d2.rotation.x = Math.PI / 2;
+    var spk = at(cyl(1.15, 0.35, M.dark, 32), 4.75, 5.0, 0.2, head); spk.rotation.z = Math.PI / 2;
+    var glowLight = new T.PointLight(0xffb060, 0.5, 14); glowLight.position.set(0, 4.9, 5.5); head.add(glowLight);
+    var knob = new T.Group(); knob.position.set(0.2, 10.4, 0); head.add(knob);
+    at(cyl(0.95, 0.8, M.gold, 20), 0, 0.4, 0, knob);
+    at(cyl(1.0, 1.5, M.red, 20), 0, 1.55, 0, knob);
+    for (var k = 0; k < 16; k++) { var ka = k / 16 * Math.PI * 2; var rib = rbox(0.16, 1.5, 0.16, 0.05, M.red); rib.position.set(Math.cos(ka) * 1.02, 1.55, Math.sin(ka) * 1.02); knob.add(rib); }
+    at(new T.Mesh(new T.SphereGeometry(0.55, 20, 20), M.dark), 0, 2.7, 0, knob);
+
+    robot.rotation.y = -0.45;
+    var rotY = -0.45, headYaw = 0, headWant = 0, dragging = false, lastX = 0, lastDrag = 0, moved = 0;
+
+    function size() { var w = stage.clientWidth, h = stage.clientHeight; if (!w || !h) { return; } renderer.setSize(w, h, false); cam.aspect = w / h; cam.position.z = w / h < 0.9 ? 54 : 50; cam.updateProjectionMatrix(); }
+    size(); addEventListener('resize', size);
+
+    addEventListener('pointermove', function (e) {
+      var r = stage.getBoundingClientRect(); var cx = r.left + r.width / 2;
+      headWant = Math.max(-0.55, Math.min(0.55, (e.clientX - cx) / Math.max(innerWidth, 1) * 1.6));
+      if (dragging) { var dx = e.clientX - lastX; lastX = e.clientX; rotY += dx * 0.012; moved += Math.abs(dx); lastDrag = performance.now(); bot.target = null; }
+    });
+    canvas.addEventListener('pointerdown', function (e) { dragging = true; lastX = e.clientX; moved = 0; });
+    addEventListener('pointerup', function () { if (dragging && moved < 5) { tap(); } dragging = false; });
+    addEventListener('pointercancel', function () { dragging = false; });
+
+    var visible = true;
+    if ('IntersectionObserver' in window) { new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(stage); }
+
+    var clock = new T.Clock();
+    function frame() {
+      requestAnimationFrame(frame);
+      if (!visible) { return; }
+      var dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime;
+      if (bot.target !== null) { rotY += (bot.target - rotY) * Math.min(1, dt * 4); }
+      else if (!dragging && performance.now() - lastDrag > 2500 && !reduce) { rotY += (-0.45 + Math.sin(t * 0.35) * 0.3 - rotY) * dt * 0.8; }
+      robot.rotation.y = rotY;
+      headYaw += (headWant - headYaw) * Math.min(1, dt * 3);
+      head.rotation.y = headYaw; gear.rotation.y = headYaw * 2.2;
+      /* tap: a quick nod */
+      bot.tap = Math.max(0, bot.tap - dt * 4);
+      head.position.y = 10.2 - Math.sin(bot.tap * Math.PI) * 0.5;
+      head.rotation.x = Math.sin(bot.tap * Math.PI) * 0.08;
+      /* ear dial */
+      knob.rotation.y += (bot.knob - knob.rotation.y) * Math.min(1, dt * 8);
+      /* breath: the ring swells for 4 s and settles for 4 s */
+      var b = bot.breath ? (0.5 - 0.5 * Math.cos(t * Math.PI / 4)) : 0.25 + (reduce ? 0 : Math.sin(t * 1.3) * 0.06);
+      M.glow.emissiveIntensity = 0.35 + b * 0.9; glowLight.intensity = 0.25 + b * 1.1;
+      var s = 1 + (bot.breath ? b * 0.07 : 0); ring.scale.set(s, s, s);
+      /* blink */
+      var blink = (t % 4.2) < 0.13 ? 0.12 : 1; eyeL.scale.y = eyeR.scale.y = blink;
+      eyeL.position.x = -0.75 + headYaw * 0.5; eyeR.position.x = 0.75 + headYaw * 0.5;
+      led.visible = (t % 2.4) < 1.9;
+      /* a little wiggle on the part that was asked about */
+      if (bot.focus) { bot.focusT += dt; var w = Math.sin(bot.focusT * 9) * Math.max(0, 1 - bot.focusT);
+        if (bot.focus === 'ear') { knob.rotation.y += w * 0.2; } if (bot.focus === 'neck') { head.rotation.y += w * 0.25; }
+        if (bot.focus === 'speaker') { spk.scale.setScalar(1 + Math.abs(w) * 0.25); } if (bot.focus === 'camera') { ring.scale.setScalar(s + Math.abs(w) * 0.12); }
+        if (bot.focus === 'eyes') { eyeL.scale.y = eyeR.scale.y = 1 + Math.abs(w) * 0.8; } if (bot.focus === 'base') { robot.position.y = Math.abs(w) * 0.5; }
+        if (bot.focusT > 1.2) { bot.focus = null; spk.scale.setScalar(1); robot.position.y = 0; } }
+      renderer.render(scene, cam);
+    }
+    frame();
+  }
+
+  try { if (window.THREE) { build3D(); } else { fallback(); } } catch (e) { fallback(); }
+
+  /* ---------- ritual ---------- */
+  var dialIdx = 0, dialVals = [5, 5, 5], dial = $('dial');
+  [].slice.call(document.querySelectorAll('[data-dial]')).forEach(function (b) {
+    b.addEventListener('click', function () {
+      dialIdx = +b.dataset.dial; dial.value = dialVals[dialIdx];
+      [].slice.call(document.querySelectorAll('[data-dial]')).forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+    });
+  });
+  dial.addEventListener('input', function () { dialVals[dialIdx] = +dial.value; $('d' + dialIdx).textContent = dial.value; bot.knob = (dialVals[0] + dialVals[1] + dialVals[2]) * 0.45; });
+
+  var breathTimer = null;
+  $('breathBtn').addEventListener('click', function () {
+    var on = this.getAttribute('aria-pressed') !== 'true';
+    this.setAttribute('aria-pressed', on ? 'true' : 'false'); this.textContent = on ? 'Stop' : 'Start breathing';
+    bot.breath = on; clearInterval(breathTimer); var dot = $('breathDot'), say = $('breathSay'), inn = false;
+    function step() { inn = !inn; dot.classList.toggle('in', inn); say.textContent = inn ? 'Breathe in…' : 'And out…'; }
+    if (on) { step(); breathTimer = setInterval(step, 4000); } else { dot.classList.remove('in'); say.textContent = 'Press start and breathe with the ring.'; }
+  });
+
+  var tapTimes = [];
+  function tap() {
+    bot.tap = 1; var now = performance.now();
+    if (tapTimes.length && now - tapTimes[tapTimes.length - 1] > 3000) { tapTimes = []; $('taps').innerHTML = ''; }
+    tapTimes.push(now); if (tapTimes.length > 6) { tapTimes.shift(); }
+    var d = document.createElement('i'); $('taps').appendChild(d); if ($('taps').children.length > 24) { $('taps').removeChild($('taps').firstChild); }
+    if (tapTimes.length > 1) { var span = (tapTimes[tapTimes.length - 1] - tapTimes[0]) / (tapTimes.length - 1); $('bpm').textContent = Math.round(60000 / span); }
+  }
+  $('tapBtn').addEventListener('click', tap);
+
+  /* ---------- glasses switch ---------- */
+  $('seeBtn').addEventListener('click', function () {
+    var on = this.getAttribute('aria-checked') !== 'true'; this.setAttribute('aria-checked', on ? 'true' : 'false');
+    $('walk').classList.toggle('see-on', on);
+    $('laneSay').textContent = on ? 'Gemini Live · about 1 picture a second' : 'voice only';
+    $('seeSay').textContent = on
+      ? '“Let Kaiku see” is on. About one picture a second goes to this walk’s conversation and nowhere else. Never saved, never sent to your care team.'
+      : '“Let Kaiku see” is off, as it starts. Kaiku is a voice in your ear and sees nothing.';
+  });
+
+  /* ---------- sentence journey ---------- */
+  var stops = [].slice.call(document.querySelectorAll('#journey .stop')), jTimer = null;
+  function play() {
+    clearInterval(jTimer); var i = -1; $('reply').classList.add('wait');
+    stops.forEach(function (s) { s.classList.remove('on'); });
+    function step() { i++; stops.forEach(function (s, n) { s.classList.toggle('on', n === i); });
+      if (i === stops.length - 1) { $('reply').classList.remove('wait'); clearInterval(jTimer); } }
+    step(); jTimer = setInterval(step, reduce ? 300 : 1100);
+  }
+  $('playBtn').addEventListener('click', play);
+  if ('IntersectionObserver' in window) { var jo = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { play(); jo.disconnect(); } }, { threshold: 0.4 }); jo.observe($('journey')); }
+  else { stops[stops.length - 1].classList.add('on'); $('reply').classList.remove('wait'); }
+
+  /* ---------- consensus toy ---------- */
+  var names = ['Check-ins and robot', 'Walks and outings', 'Apps', 'Watch, if worn'], vals = [0, 0, 0, 0], labels = ['As usual', 'Changed', 'No data'];
+  names.forEach(function (n, gi) {
+    var g = document.createElement('div'); g.className = 'group'; g.innerHTML = '<h3>' + n + '</h3>';
+    var seg = document.createElement('div'); seg.className = 'seg'; seg.setAttribute('role', 'group'); seg.setAttribute('aria-label', n);
+    labels.forEach(function (l, vi) {
+      var b = document.createElement('button'); b.textContent = l; b.setAttribute('aria-pressed', vi === 0 ? 'true' : 'false');
+      b.addEventListener('click', function () { vals[gi] = vi; [].slice.call(seg.children).forEach(function (o, oi) { o.setAttribute('aria-pressed', oi === vi ? 'true' : 'false'); }); verdict(); });
+      seg.appendChild(b);
+    });
+    g.appendChild(seg); $('groups').appendChild(g);
+  });
+  function verdict() {
+    var data = vals.filter(function (v) { return v !== 2; }).length, changed = vals.filter(function (v) { return v === 1; }).length;
+    var s = ['Stable', 'st-stable', 'Enough recent evidence, as usual or better.'];
+    if (data < 2) { s = ['Insufficient', 'st-none', 'Not enough data. Missing data never reads as stable.']; }
+    else if (changed >= 2) { s = ['Needs a call', 'st-call', 'Several groups have changed from this person’s usual.']; }
+    else if (changed === 1) { s = ['Watch', 'st-watch', 'One group has changed from usual. Worth a check-in.']; }
+    else if (data < 3) { s = ['Watch', 'st-watch', 'Nothing has changed, but coverage is thin.']; }
+    var el = $('state'); el.textContent = s[0]; el.className = 'state ' + s[1]; $('why').textContent = s[2];
+  }
+})();
+</script>
+
+</body>
+</html>
