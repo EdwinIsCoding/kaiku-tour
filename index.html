@@ -185,6 +185,15 @@ input[type=range] { width: 100%; accent-color: var(--red) }
 .track { display: flex; flex-direction: column; gap: 8px }
 .track ul { margin: 6px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 15.5px; line-height: 1.4; color: var(--ink-2) }
 .track b { color: var(--ink) }
+.clips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 44px }
+.clips figure, .gallery figure { margin: 0 }
+.clips figcaption { margin-top: 18px; font: 600 20px/1.2 var(--display) }
+.gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 30px }
+.gallery img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 22px; display: block; box-shadow: 0 7px 0 var(--red) }
+.wide { width: 100%; border-radius: 18px; border: 7px solid #2A211C; overflow: hidden; background: #2A211C; box-shadow: 0 12px 0 var(--red), 0 30px 50px var(--shadow) }
+.wide video { width: 100%; display: block }
+.band-lens .wide { box-shadow: 0 12px 0 var(--apricot) }
+@media (max-width: 860px) { .clips { grid-template-columns: minmax(0, 1fr) } .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
 /* scroll reveal: hidden only once JS has marked what is below the fold */
 .pre { opacity: 0; transform: translateY(26px) }
 .rv { transition: opacity .7s ease-out, transform .7s ease-out }
@@ -239,12 +248,13 @@ input[type=range] { width: 100%; accent-color: var(--red) }
         <label class="fine" for="dial">Turn it</label>
         <input type="range" id="dial" min="0" max="10" value="5">
         <div class="dials"><span>Mood<b id="d0">5</b></span><span>Energy<b id="d1">5</b></span><span>Sleep<b id="d2">5</b></span></div>
+        <p class="fine">Watch the robot: its ring light changes colour as you turn.</p>
       </div>
       <div class="panel rv">
         <p class="kicker">Two · a breath</p>
         <h3>One slow breath together</h3>
         <span class="ring breath-dot" id="breathDot"></span>
-        <p class="fine" id="breathSay" aria-live="polite">Press start and breathe with the ring.</p>
+        <p class="fine" id="breathSay" aria-live="polite">Press start. Kaiku guides you: in as the ring swells, out as it settles.</p>
         <button id="breathBtn" aria-pressed="false">Start breathing</button>
       </div>
       <div class="panel rv">
@@ -252,8 +262,8 @@ input[type=range] { width: 100%; accent-color: var(--red) }
         <h3>Tap a rhythm on its head</h3>
         <p class="bpm"><span id="bpm">0</span> <span style="font-size:20px">taps a minute</span></p>
         <div class="taps" id="taps" aria-hidden="true"></div>
-        <button id="tapBtn">Tap</button>
-        <p class="fine">Or click the robot’s head. Inspired by research on improvisational music therapy.</p>
+        <div class="seg"><button id="beatBtn" style="background:var(--lens);color:var(--on-lens)">Play the rhythm</button><button id="tapBtn" style="background:var(--red);color:var(--on-red)">Tap it back</button></div>
+        <p class="fine">Listen first, then tap it back, here or on the robot’s head. With sound, like the real one. Inspired by research on improvisational music therapy.</p>
       </div>
     </div>
   </div>
@@ -278,6 +288,16 @@ input[type=range] { width: 100%; accent-color: var(--red) }
           <li>Every hardware part has a software twin, so the rest never waited for the print.</li>
         </ul>
       </div>
+    </div>
+    <div class="clips">
+      <figure class="rv"><div class="wide"><video src="media/talk.mp4" poster="media/talk.jpg" muted loop playsinline controls preload="none" aria-label="Talking with the Kaiku robot, with a diagram of what happens underneath"></video></div><figcaption>Press its ear, and it talks with you</figcaption></figure>
+      <figure class="rv"><div class="wide"><video src="media/drum.mp4" poster="media/drum.jpg" muted loop playsinline controls preload="none" aria-label="The drum game on the Kaiku robot: it plays a rhythm and the person taps it back on its head"></video></div><figcaption>A drum, for the days words are hard</figcaption></figure>
+    </div>
+    <div class="gallery">
+      <figure class="rv"><img src="media/robot-full.jpg" alt="The whole Kaiku robot on a workbench" loading="lazy"></figure>
+      <figure class="rv"><img src="media/robot-head.jpg" alt="The robot’s head close up, with its glowing camera ring" loading="lazy"></figure>
+      <figure class="rv"><img src="media/robot-orbit.jpg" alt="The robot from the side, with its speaker grille and the wiring behind" loading="lazy"></figure>
+      <figure class="rv"><img src="media/cad-render.png" alt="A render of the robot from the CAD files it was printed from" loading="lazy" style="object-fit:contain; background:var(--panel)"></figure>
     </div>
   </div>
 </section>
@@ -306,7 +326,8 @@ input[type=range] { width: 100%; accent-color: var(--red) }
     <div class="feature flip">
       <div class="walk rv" id="walk">
         <p class="kicker">On a walk</p>
-        <div class="glasses" aria-hidden="true">
+        <div class="wide" style="box-shadow:none; border-width:5px; margin:10px 0 4px"><video src="media/glasses.mp4" poster="media/glasses.jpg" muted loop playsinline controls preload="none" aria-label="A walk with Kaiku on the iPhone app and Meta glasses, showing the pictures the glasses sent to the conversation"></video></div>
+        <div class="glasses" aria-hidden="true" hidden>
           <div class="lensg"></div><div class="bridge"></div><div class="lensg"><span class="wave"></span><span class="wave w2"></span></div>
         </div>
         <div class="lane"><span>glasses</span><span id="laneSay">voice only</span>
@@ -343,7 +364,8 @@ input[type=range] { width: 100%; accent-color: var(--red) }
   <div class="wrap">
     <p class="eyebrow">How it thinks</p>
     <h2>How one sentence travels</h2>
-    <p class="lead muted">Three brains, one job each. Press play and follow it.</p>
+    <p class="lead muted">Three brains, one job each. Here is the real path, recorded hop by hop, and the short version underneath.</p>
+    <div class="wide rv" style="margin-top:28px"><video src="media/flow.mp4" poster="media/flow.jpg" autoplay muted loop playsinline controls aria-label="A recording of one sentence travelling from the Mac to Gemini Live, to Kaiku’s rules and back, with what crosses each gate and how long each hop took"></video></div>
     <div class="bubble">
       <p class="me">I’m not feeling too well.</p>
       <p class="k wait" id="reply">…that sounds heavy. Do you want to tell me about it?</p>
@@ -433,21 +455,15 @@ input[type=range] { width: 100%; accent-color: var(--red) }
   </div>
 </section>
 
-<section class="band" id="works">
+<section class="band" id="built">
   <div class="wrap">
-    <p class="eyebrow">Does it work?</p>
-    <h2>On people: unknown. On synthetic people:</h2>
-    <div class="cards3">
-      <div class="rv"><p class="big">0.08</p><h3>false flags per person-week</h3><p class="muted" style="margin-top:8px">About one unneeded “worth a check-in” per person every three months.</p></div>
-      <div class="rv"><p class="big">96 %</p><h3>of moderate changes flagged</h3><p class="muted" style="margin-top:8px">Within 21 days. A sudden drop takes about two days, a slow slide about a week.</p></div>
-      <div class="rv"><p class="big" style="color:var(--ink)">21 %</p><h3>of mild changes reach “needs a call”</h3><p class="muted" style="margin-top:8px">Mild change is mostly missed, and skipped check-ins hide a decline.</p></div>
-    </div>
-    <p class="fine" style="margin-top:22px">Our own generator, assumptions in docs/validation.md. These numbers describe the rule, not people. Nothing here is clinically validated.</p>
-
-    <div class="cards3" style="margin-top:56px">
-      <div class="panel rv"><h3>Real today</h3><ul class="ticks"><li>The robot, built, with the ritual by ear dial</li><li>The dashboard, live on Modal</li><li>Real Gemma and Gemini Live calls</li><li>A signed app on a real iPhone</li><li>Real Meta glasses, registered and connected</li></ul></div>
-      <div class="panel rv" style="box-shadow:0 9px 0 var(--gold)"><h3>Pretend</h3><ul class="ticks"><li>Every person’s record, and it says so on screen</li><li>The synthetic people behind the numbers above</li><li>Thresholds: engineering defaults, not set on patients</li></ul></div>
-      <div class="panel rv" style="box-shadow:0 9px 0 var(--lens)"><h3>Still to test</h3><ul class="ticks"><li>A whole ritual on the physical robot, with its record on the dashboard</li><li>A filmed walk on the real glasses</li><li>People outside the team</li><li>Anything clinical</li></ul></div>
+    <p class="eyebrow">One weekend</p>
+    <h2>Built this weekend, and it runs</h2>
+    <div class="cards3" style="grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))">
+      <div class="rv"><p class="big">4</p><h3>devices, one voice</h3><p class="muted" style="margin-top:8px">Robot, iPhone, Mac and Meta glasses.</p></div>
+      <div class="rv"><p class="big">2.3 s</p><h3>from your last word to Kaiku’s first</h3><p class="muted" style="margin-top:8px">Gemini Live, measured over five turns.</p></div>
+      <div class="rv"><p class="big">6</p><h3>technologies in one companion</h3><p class="muted" style="margin-top:8px">Gemini, Gemma, Modal, Meta, Atech, Arduino.</p></div>
+      <div class="rv"><p class="big" style="color:var(--ink)">973</p><h3>tests passing behind it</h3><p class="muted" style="margin-top:8px">And a practitioner page that is live right now.</p></div>
     </div>
   </div>
 </section>
@@ -551,6 +567,7 @@ input[type=range] { width: 100%; accent-color: var(--red) }
     /* the camera's ring light: a glowing ring around a dark lens */
     var ringM = new T.Mesh(new T.RingGeometry(19, 30.5, 64), M.glow); ringM.rotation.x = Math.PI / 2; ringM.position.set(0, -29.2, 187.6); head.add(ringM);
     var lensM = new T.Mesh(new T.CircleGeometry(19.2, 48), M.dark); lensM.rotation.x = Math.PI / 2; lensM.position.set(0, -29.1, 187.6); head.add(lensM);
+    var cCool = new T.Color(0x6f8cff), cWarm = new T.Color(0xff9d2e), cRose = new T.Color(0xff5a6e);
     var glowLight = new T.PointLight(0xffb060, 0.5, 160); glowLight.position.set(0, -60, 188); head.add(glowLight);
 
     robot.rotation.y = -0.5;
@@ -588,6 +605,7 @@ input[type=range] { width: 100%; accent-color: var(--red) }
       /* breath: the ring swells for 4 s and settles for 4 s */
       var b = bot.breath ? (0.5 - 0.5 * Math.cos(t * Math.PI / 4)) : 0.25 + (reduce ? 0 : Math.sin(t * 1.3) * 0.06);
       M.glow.emissiveIntensity = 0.35 + b * 0.9; glowLight.intensity = 0.25 + b * 1.1;
+      if (bot.hue != null) { var hc = bot.hue < 0.5 ? cCool.clone().lerp(cWarm, bot.hue * 2) : cWarm.clone().lerp(cRose, (bot.hue - 0.5) * 2); M.glow.emissive.lerp(hc, Math.min(1, dt * 6)); M.glow.color.lerp(hc, Math.min(1, dt * 6)); glowLight.color.lerp(hc, Math.min(1, dt * 6)); }
       led.visible = (t % 2.4) < 1.9;
       /* a little wiggle on the part that was asked about */
       if (bot.focus) { bot.focusT += dt; var w = Math.sin(bot.focusT * 9) * Math.max(0, 1 - bot.focusT);
@@ -614,7 +632,7 @@ input[type=range] { width: 100%; accent-color: var(--red) }
       [].slice.call(document.querySelectorAll('[data-dial]')).forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
     });
   });
-  dial.addEventListener('input', function () { dialVals[dialIdx] = +dial.value; $('d' + dialIdx).textContent = dial.value; bot.knob = (dialVals[0] + dialVals[1] + dialVals[2]) * 0.45; });
+  dial.addEventListener('input', function () { dialVals[dialIdx] = +dial.value; $('d' + dialIdx).textContent = dial.value; bot.knob = (dialVals[0] + dialVals[1] + dialVals[2]) * 0.45; bot.hue = dial.value / 10; });
 
   var breathTimer = null;
   $('breathBtn').addEventListener('click', function () {
@@ -622,11 +640,27 @@ input[type=range] { width: 100%; accent-color: var(--red) }
     this.setAttribute('aria-pressed', on ? 'true' : 'false'); this.textContent = on ? 'Stop' : 'Start breathing';
     bot.breath = on; clearInterval(breathTimer); var dot = $('breathDot'), say = $('breathSay'), inn = false;
     function step() { inn = !inn; dot.classList.toggle('in', inn); say.textContent = inn ? 'Breathe in…' : 'And out…'; }
-    if (on) { step(); breathTimer = setInterval(step, 4000); } else { dot.classList.remove('in'); say.textContent = 'Press start and breathe with the ring.'; }
+    if (on) { step(); breathTimer = setInterval(step, 4000); } else { dot.classList.remove('in'); say.textContent = 'Press start. Kaiku guides you: in as the ring swells, out as it settles.'; }
   });
 
+  /* sound: a small drum voice, started only from a press */
+  var actx = null;
+  function audio() { try { if (!actx) { var AC = window.AudioContext || window.webkitAudioContext; actx = new AC(); } if (actx.state === 'suspended') { actx.resume(); } } catch (e) { actx = null; } return actx; }
+  function hit(when, freq, loud) {
+    var c = actx; if (!c) { return; }
+    var o = c.createOscillator(), g = c.createGain(); o.type = 'sine';
+    o.frequency.setValueAtTime(freq * 1.8, when); o.frequency.exponentialRampToValueAtTime(freq, when + 0.09);
+    g.gain.setValueAtTime(0.0001, when); g.gain.exponentialRampToValueAtTime(loud, when + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, when + 0.32);
+    o.connect(g); g.connect(c.destination); o.start(when); o.stop(when + 0.35);
+  }
+  $('beatBtn').addEventListener('click', function () {
+    if (!audio()) { return; }
+    var t0 = actx.currentTime + 0.08, beat = 0.6, pat = [0, 1, 1.5, 2, 3, 3.5, 4, 5, 5.5, 6, 7];
+    pat.forEach(function (b, i) { hit(t0 + b * beat, b % 2 === 0 ? 110 : 165, b % 2 === 0 ? 0.5 : 0.3); if (b % 1 === 0) { setTimeout(function () { bot.tap = 0.6; }, (0.08 + b * beat) * 1000); } });
+  });
   var tapTimes = [];
   function tap() {
+    if (actx || document.activeElement === $('tapBtn')) { if (audio()) { hit(actx.currentTime + 0.01, 220, 0.45); } }
     bot.tap = 1; var now = performance.now();
     if (tapTimes.length && now - tapTimes[tapTimes.length - 1] > 3000) { tapTimes = []; $('taps').innerHTML = ''; }
     tapTimes.push(now); if (tapTimes.length > 6) { tapTimes.shift(); }
