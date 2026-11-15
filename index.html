@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Kaiku: a friend on your desk, a voice in your ear, a clearer record for your care team.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -197,6 +200,8 @@ input[type=range] { width: 100%; accent-color: var(--red) }
 .clips figcaption { margin-top: 18px; font: 600 20px/1.2 var(--display) }
 .gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 30px }
 .gallery img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 22px; display: block; box-shadow: 0 7px 0 var(--red) }
+.gallery figure.big { grid-column: span 2; grid-row: span 2 }
+.gallery figure.big img { height: 100%; aspect-ratio: auto }
 .wide { width: 100%; border-radius: 18px; border: 7px solid #2A211C; overflow: hidden; background: #2A211C; box-shadow: 0 12px 0 var(--red), 0 30px 50px var(--shadow) }
 .wide video { width: 100%; display: block }
 .band-lens .wide { box-shadow: 0 12px 0 var(--apricot) }
@@ -304,9 +309,10 @@ input[type=range] { width: 100%; accent-color: var(--red) }
       <figure class="rv"><div class="wide"><video src="media/drum.mp4" poster="media/drum.jpg" muted loop playsinline controls preload="none" aria-label="The drum game on the Kaiku robot: it plays a rhythm and the person taps it back on its head"></video></div><figcaption>A drum, for the days words are hard</figcaption></figure>
     </div>
     <div class="gallery">
+      <figure class="rv big"><img src="media/robot-best.jpg" alt="The Kaiku robot on a workbench at Junction: a red and white head with a glowing ring around its camera and a dial on top, on a geared neck above a white body with red rails, gold windows and a green light behind its vents" loading="lazy"></figure>
       <figure class="rv"><img src="media/robot-full.jpg" alt="The whole Kaiku robot on a workbench" loading="lazy"></figure>
-      <figure class="rv"><img src="media/robot-head.jpg" alt="The robot’s head close up, with its glowing camera ring" loading="lazy"></figure>
       <figure class="rv"><img src="media/robot-orbit.jpg" alt="The robot from the side, with its speaker grille and the wiring behind" loading="lazy"></figure>
+      <figure class="rv"><img src="media/drum.jpg" alt="Tapping a rhythm on the robot’s head during the drum game" loading="lazy"></figure>
       <figure class="rv"><img src="media/cad-render.png" alt="A render of the robot from the CAD files it was printed from" loading="lazy" style="object-fit:contain; background:var(--panel)"></figure>
     </div>
   </div>
