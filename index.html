@@ -78,6 +78,8 @@ button[aria-pressed="true"], .seg button[aria-pressed="true"] { background: var(
 .watch b { display: block; font: 600 clamp(24px, 3vw, 32px)/1.1 var(--display) } .watch small { display: block; font: 700 14px/1.3 var(--text); letter-spacing: .06em; color: #5E5148; margin-top: 3px }
 .watch-play { width: 62px; height: 62px; border-radius: 50%; background: #CF351D; position: relative; flex: none; box-shadow: 0 0 0 5px #FFE7B0 }
 .watch-play::after { content: ""; position: absolute; left: 25px; top: 18px; border-style: solid; border-width: 13px 0 13px 20px; border-color: transparent transparent transparent #FFFDF8 }
+.visit { display: flex; align-items: center; gap: 14px; margin-top: 22px; font: 600 clamp(19px, 2.2vw, 24px)/1.25 var(--display); color: var(--on-red) }
+.visit b { color: var(--glow) }
 /* hero */
 .hero { padding-block: 40px 56px }
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: center }
@@ -223,6 +225,7 @@ input[type=range] { width: 100%; accent-color: var(--red) }
       <div class="rails"><i></i><i></i></div>
       <p class="lead">A friend on your desk, a voice in your ear, a clearer record for your care team. For staying well at home after TMS depression treatment.</p>
       <a class="watch" href="https://youtu.be/-EBrKRAcCHQ" target="_blank" rel="noopener"><span class="watch-play" aria-hidden="true"></span><span><b>Watch the demo</b><small>2 minutes on YouTube</small></span></a>
+      <p class="visit"><span class="ring" style="width:22px;height:22px;border-width:5px;flex:none" aria-hidden="true"></span><span>Come and talk to the robot: <b>Floor 5, table B198</b></span></p>
       <div class="parts" role="group" aria-label="Parts of the robot">
         <button class="chip" data-part="ear">Ear dial</button>
         <button class="chip" data-part="camera">Camera</button>
@@ -481,7 +484,7 @@ input[type=range] { width: 100%; accent-color: var(--red) }
     <h2>A pilot with a TMS clinic</h2>
     <p class="lead">Eight to twelve weeks after a course: does the consensus agree with the clinician, and do people keep the ritual? Then thresholds set on real days.</p>
     <div class="foot-grid" style="margin-top:40px">
-      <div><p class="eyebrow">Team</p><h3>Harrish · Edwin · Xavier</h3></div>
+      <div><p class="eyebrow">Team</p><h3>Harrish · Edwin · Xavier</h3><p class="visit" style="margin-top:14px"><span>Try the robot yourself: <b>Floor 5, table B198</b></span></p></div>
       <p class="fine" style="max-width:30em"><a href="https://github.com/Harrishayy/kaiku">github.com/Harrishayy/kaiku</a> · MIT<br>Research prototype. Not a medical device, not a crisis service. Every record shown is simulated.</p>
     </div>
   </div>
