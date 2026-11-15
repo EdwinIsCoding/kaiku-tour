@@ -82,7 +82,7 @@ button[aria-pressed="true"], .seg button[aria-pressed="true"] { background: var(
 .watch-play { width: 62px; height: 62px; border-radius: 50%; background: #CF351D; position: relative; flex: none; box-shadow: 0 0 0 5px #FFE7B0 }
 .watch-play::after { content: ""; position: absolute; left: 25px; top: 18px; border-style: solid; border-width: 13px 0 13px 20px; border-color: transparent transparent transparent #FFFDF8 }
 .visit { display: flex; align-items: center; gap: 14px; margin-top: 22px; font: 600 clamp(19px, 2.2vw, 24px)/1.25 var(--display); color: var(--on-red) }
-.visit b { color: var(--glow) }
+.visit b { color: var(--glow); display: block; white-space: nowrap }
 /* hero */
 .hero { padding-block: 40px 56px }
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: center }
